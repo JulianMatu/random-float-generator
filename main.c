@@ -50,7 +50,7 @@
 #include <stdlib.h>
 
 //import x86 main function
-extern char* executive();
+extern void executive();
 
 int main () {
     printf("Welcome to Random Products, LLC.\n");
@@ -58,10 +58,9 @@ int main () {
     printf("\n");
 
     //call the executive() function from the executive x86 source file
-    char* c = executive();
+    executive();
     
     printf("\n");
-    printf("Oh, %s. We hope you enjoyed your arrays. Do come again.\n", c);
     printf("A zero will be returned to the operating system.\n");
 
     return 0;

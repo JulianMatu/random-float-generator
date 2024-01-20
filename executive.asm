@@ -36,7 +36,7 @@ segment .data
     arr_sorted: db "The array is now being sorted.", 10, 10, 0
     arr_display: db "Here is the updated array.",10, 10, 0
     arr_norm: db "The random numbers will be normalized. Here is the normalized array.", 10, 10, 0
-    closing: db "Good bye %s.  You are welcome any time.", 10, 0
+    closing: db "Goodbye. You are welcome any time.", 10, 0
     invalid_input: db "Invalid Input. Try Again.", 10, 0
 
     ;additional strings
@@ -75,69 +75,6 @@ segment .text
         pushf                                                       ;Backup rflags
 
         ;Operation Blocks:
-
-        ;Name prompt
-        push qword 0
-        mov rax, 0
-        mov rdi, format         ;format into cstring
-        mov rsi, prompt_name    ;"Please enter your name: "
-        call printf
-        pop rax
-
-        ;Name:
-        ;Getting user input w/ whitespace:
-        ;Must use fgets since scanf will interpret a space between two strings as two seperate inputs
-        push qword 0
-        mov rax, 0              ;0 indicates we will not have any floating pt arguments, so 0 XMM registers used
-        mov rdi, name           ;thing we put the input into
-        mov rsi, INPUT_LEN      ;copy the reserved string size
-        mov rdx, [stdin]        ;take keyboard input
-        call fgets              ;name is now populated with user input
-        pop rax
-        ;remove the new line character '/n'
-        push qword 0
-        mov rax, 0              ;0 floating point arguments
-        mov rdi, name           ;name is the first argument
-        call strlen             ;returns the length of name until the '\0' termination and puts it into rax
-        sub rax, 1              ;subtract one from rax to obtain the index of '\n'
-        mov byte [name + rax], 0;replace the byte in name where '\n' is with '\0'
-        pop rax
-
-        ;Title prompt
-        push qword 0
-        mov rax, 0
-        mov rdi, format         ;format into cstring
-        mov rsi, prompt_title   ;"Please enter your title (Mr,Ms,Sargent,Chief,Project Leader,etc): "
-        call printf
-        pop rax
-
-        ;Title:
-        ;Getting user input w/ whitespace:
-        ;Must use fgets since scanf will interpret a space between two strings as two seperate inputs
-        push qword 0
-        mov rax, 0              ;0 indicates we will not have any floating pt arguments, so 0 XMM registers used
-        mov rdi, title          ;thing we put the input into
-        mov rsi, INPUT_LEN      ;copy the reserved string size
-        mov rdx, [stdin]        ;take keyboard input
-        call fgets              ;title is now populated with user input
-        pop rax
-        ;remove the new line character '/n'
-        push qword 0
-        mov rax, 0              ;0 floating point arguments
-        mov rdi, title          ;title is the first argument
-        call strlen             ;returns the length of title until the '\0' termination and puts it into rax
-        sub rax, 1              ;subtract one from rax to obtain the index of '\n'
-        mov byte [name + rax], 0;replace the byte in title where '\n' is with '\0'
-        pop rax
-
-        ;Name answer
-        push qword 0
-        mov rax, 0              ;no xmm arguments
-        mov rdi, greeting       ;format into cstring
-        mov rsi, title          ;"Nice to meet you [title] [name]. "
-        mov rdx, name           ;
-        call printf             ;arguments in this order: rdi, rsi, rdx, rcx, r8, r9, ...
-        pop rax
 
         ;Display program info
         push qword 0
@@ -279,7 +216,7 @@ segment .text
         pop r8
 
         ;move pointer to array into return register
-        mov rax, name
+        mov rax, 0
         push qword 0
 
         ;===== Restore original values to integer registers ===================================================================
