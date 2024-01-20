@@ -13,4 +13,4 @@ Julian Matuszewski
 Email: julianmatuszewski@csu.fullerton.edu
 
 ## Copyright
-This work is covered by the GNU General Public License 3, see [LICENSE]() for full Copyright statement.
+This work is covered by the GNU General Public License 3, see [LICENSE](https://github.com/JulianMatu/random-float-generator/blob/main/LICENSE) for full Copyright statement.
